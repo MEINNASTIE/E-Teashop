@@ -1,8 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+// import DropdownMenu from './DropdownMenu';
+
+import { useAuth } from '../auth/AuthLoginContext';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
+  const { isLoggedIn, logout } = useAuth();
+
+  console.log('IsLoggedIn in Navbar:', isLoggedIn);
+  console.log('Logout present:', logout)
+
   return (
     <nav className="bg-gray-800 py-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -21,13 +29,17 @@ export default function Navbar() {
           />
         </div>
         
-        {/* User Login */}
-        <div className="mr-4">
-          <Link to="/login" className="text-white focus:outline-none">
-            <FontAwesomeIcon icon={faUser} className="text-white text-xl" />
-          </Link>
-        </div>
-        
+        {/* User Login Dropdown logic */}
+        {/* {isLoggedIn ? <DropdownMenu logout={logout} /> : <Link to="/login">Login</Link>} */}
+
+        {isLoggedIn ? (
+          <button onClick={logout} className="text-white">
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="text-white">Login</Link>
+        )}
+
         {/* Cart */}
         <div>
           <button className="text-white focus:outline-none">

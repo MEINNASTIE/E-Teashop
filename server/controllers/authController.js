@@ -48,7 +48,7 @@ export const handleLogin = async (req, res) => {
     });
     console.log("🚀 ~ token:", token);
 
-    res.cookie("social_media", token, {
+    res.cookie("jwt_token", token, {
       httpOnly: true,
       secure: process.env.production,
       sameSite: process.env.production ? "None" : "Lax",

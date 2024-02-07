@@ -5,7 +5,7 @@ export default function Home() {
         <div>
             <div>
                 <Navbar />
-                <h1>Welcome To our magnificent tea shop</h1>
+                <h1>Welcome To our magnificent shop</h1>
             </div>
         </div>
     );

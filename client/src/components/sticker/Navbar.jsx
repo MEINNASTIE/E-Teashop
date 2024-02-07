@@ -2,21 +2,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 // import DropdownMenu from './DropdownMenu';
 
-import { useAuth } from '../auth/AuthLoginContext';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userProvider';
 
 export default function Navbar() {
-  const { isLoggedIn, logout } = useAuth();
-
-  console.log('IsLoggedIn in Navbar:', isLoggedIn);
-  console.log('Logout present:', logout)
+  const { isLoggedIn, logout } = useContext(UserContext);
 
   return (
     <nav className="bg-gray-800 py-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
-          <img className="h-8" src="/logo.svg" alt="Logo" />
+          {/* <img className="h-8" src="/logo.svg" alt="Logo" /> */}
           <span className="text-white text-xl font-semibold ml-2">E-Shop</span>
         </div>
         
@@ -29,9 +27,7 @@ export default function Navbar() {
           />
         </div>
         
-        {/* User Login Dropdown logic */}
-        {/* {isLoggedIn ? <DropdownMenu logout={logout} /> : <Link to="/login">Login</Link>} */}
-
+        {/* User Login/Logout Button */}
         {isLoggedIn ? (
           <button onClick={logout} className="text-white">
             Logout
@@ -39,7 +35,7 @@ export default function Navbar() {
         ) : (
           <Link to="/login" className="text-white">Login</Link>
         )}
-
+        
         {/* Cart */}
         <div>
           <button className="text-white focus:outline-none">

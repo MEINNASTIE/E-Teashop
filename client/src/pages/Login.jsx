@@ -1,12 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { UserContext } from "../context/userProvider"
 
 export default function Login() {
-  const { setUser } = useContext(UserContext);
-  const navigate = useNavigate();
+  const { login } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,24 +11,13 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const body = {
-      email,
-      password,
-    };
-    const response = await axios.post(
-      "http://localhost:5000/auth/login",
-      body,
-      { withCredentials: true }
-    );
-    console.log("🚀 ~ response:", response);
+    login(email, password);
+    const response = await login(email, password);
 
-    if (response.data.success) {
-      setUser(response.data.user);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      navigate("/");
-    } else {
-      setError(response.data.error);
+    if (!response.success) {
+      setError(response.error);
     }
+
   };
 
   return (

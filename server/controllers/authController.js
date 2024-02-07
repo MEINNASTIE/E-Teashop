@@ -4,21 +4,21 @@ import jwt from "jsonwebtoken";
 
 export const handleRegister = async (req, res) => {
   try {
-    console.log("🚀 ~ Register:", req.body);
+    console.log("~ Register:", req.body);
 
     const SALT_ROUNDS = 10;
 
     const hash = await bcrypt.hash(req.body.password, SALT_ROUNDS);
 
-    console.log("🚀 ~ hash:", hash);
+    console.log("~ hash:", hash);
     req.body.password = hash;
 
     const user = await User.create(req.body);
-    console.log("🚀 ~ user:", user);
+    console.log("~ user:", user);
 
     res.status(201).send({ success: true, user });
   } catch (error) {
-    console.log("🚀 ~ error in register:", error.message);
+    console.log("~ error in register:", error.message);
 
     res.status(500).send({ success: false, error: error.message });
   }
@@ -26,15 +26,15 @@ export const handleRegister = async (req, res) => {
 
 export const handleLogin = async (req, res) => {
   try {
-    console.log("🚀 ~ Login:", req.body);
+    console.log("Login:", req.body);
 
     const user = await User.findOne({
-      email: req.body.email,
+      username: req.body.username,
     });
-    console.log("🚀 ~ user:", user);
+    console.log("user:", user);
 
     const isMatch = await bcrypt.compare(req.body.password, user.password);
-    console.log("🚀 ~ isMatch:", isMatch);
+    console.log("isMatch:", isMatch);
 
     if (!user || !isMatch)
       return res.send({
@@ -46,17 +46,11 @@ export const handleLogin = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "10d",
     });
-    console.log("🚀 ~ token:", token);
+    console.log("token:", token);
 
-    res.cookie("jwt_token", token, {
-      httpOnly: true,
-      secure: process.env.production,
-      sameSite: process.env.production ? "None" : "Lax",
-    });
-
-    res.send({ success: true, user });
+    res.send({ success: true, user, token });
   } catch (error) {
-    console.log("🚀 ~ error in login:", error.message);
+    console.log("error in login:", error.message);
 
     res.status(500).send({ success: false, error: error.message });
   }

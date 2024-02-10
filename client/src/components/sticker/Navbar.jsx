@@ -40,9 +40,9 @@ export default function Navbar() {
 
         {/* Cart */}
         <div>
-          <button className="text-white focus:outline-none">
+          <Link to="/cart" className="text-white focus:outline-none">
             <FontAwesomeIcon icon={faShoppingCart} className="text-white text-xl" />
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

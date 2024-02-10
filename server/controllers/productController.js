@@ -1,5 +1,7 @@
 import Product from '../models/Product.js';
 
+
+// GET ALL PRODUCTS
 export async function getAllProducts(req, res) {
   try {
     const products = await Product.find();
@@ -10,6 +12,7 @@ export async function getAllProducts(req, res) {
   }
 }
 
+// CREATE A PRODUCT
 export async function createProduct(req, res) {
   if (req.file) req.body.image = req.file.path;
 
@@ -17,6 +20,7 @@ export async function createProduct(req, res) {
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
+    category: req.body.category,
     imageUrl: req.file ? req.file.path : null
   });
 
@@ -30,6 +34,7 @@ export async function createProduct(req, res) {
   }
 }
 
+// UPDATE A PRODUCT
 export async function updateProduct(req, res) {
   try {
     const product = await Product.findById(req.params.id);
@@ -51,6 +56,7 @@ export async function updateProduct(req, res) {
   }
 }
 
+// DELETE A PRODUCT
 export async function deleteProduct(req, res) {
   try {
     await Product.findByIdAndDelete(req.params.id);
@@ -59,4 +65,16 @@ export async function deleteProduct(req, res) {
     res.status(500).json({ message: err.message });
   }
 }
+
+// SEPARATE CATEGORIES FROM PRODUCT
+export async function getProductCategories(req, res) {
+  try {
+    const products = await Product.find();
+    const categories = [...new Set(products.map(product => product.category))];
+    res.json({ success: true, categories });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 

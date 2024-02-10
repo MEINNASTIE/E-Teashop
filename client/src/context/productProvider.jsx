@@ -27,8 +27,19 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const updateProduct = async (productId, updatedProductData) => {
+    try {
+      const response = await axios.patch(`http://localhost:5000/admin/products/${productId}`, updatedProductData);
+      const updatedProduct = response.data;
+      
+      setProducts(products.map(product => (product._id === productId ? updatedProduct : product)));
+    } catch (error) {
+      console.error('Error updating product:', error);
+    }
+  };
+
   return (
-    <ProductContext.Provider value={{ products, addProduct, deleteProduct }}>
+    <ProductContext.Provider value={{ products, addProduct, deleteProduct, updateProduct }}>
       {children}
     </ProductContext.Provider>
   );

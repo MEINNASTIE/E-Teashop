@@ -6,6 +6,7 @@ export default function AddProduct() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
   const [image, setImage] = useState(null); // Initialize image state with null, was very important for the DOM manipulation error
 
   const handleSubmit = async (e) => {
@@ -15,12 +16,14 @@ export default function AddProduct() {
       formData.append('name', name);
       formData.append('description', description);
       formData.append('price', price);
+      formData.append('category', category);
       formData.append('image', image);
-
+      
       await addProduct(formData);
       setName('');
       setDescription('');
       setPrice('');
+      setCategory('');
       setImage(null); 
     } catch (error) {
       console.error('Error adding product:', error);
@@ -56,6 +59,14 @@ export default function AddProduct() {
           placeholder="Price" 
           value={price} 
           onChange={(e) => setPrice(e.target.value)} 
+          required 
+        />
+
+        <input 
+          type="text" 
+          placeholder="Category" 
+          value={category} 
+          onChange={(e) => setCategory(e.target.value)} 
           required 
         />
 

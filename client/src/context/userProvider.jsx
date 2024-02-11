@@ -8,30 +8,23 @@ export const UserContext = createContext();
 export default function UserProvider({ children }) {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({
+    email: "",
+    _id: "",
+  });
 
   useEffect(() => {
     const storedData = localStorage.getItem("user");
-    let userData = {};
-
-    if (storedData) userData = JSON.parse(storedData);
-
-    console.log("userData:", userData);
-
-    if (userData._id) setUser({ ...userData });
-  }, []);
-
-  useEffect(() => {
     const storedToken = localStorage.getItem("jwt_token");
+
+    if (storedData) {
+      setUser(JSON.parse(storedData));
+    }
 
     if (storedToken) {
       setIsLoggedIn(true);
     }
   }, []);
-
-  const [user, setUser] = useState({
-    email: "",
-    _id: "",
-  });
 
   const login = async (email, password) => {
     try {
@@ -42,13 +35,11 @@ export default function UserProvider({ children }) {
 
       console.log('Response data:', response.data);
 
-      // If login is successful, set isLoggedIn to true and store token locally
       if (response.data.success) {
         localStorage.setItem('jwt_token', response.data.token);
-        console.log('JWT token stored:', response.data.token);
-
+        localStorage.setItem('user', JSON.stringify(response.data.user)); // Store user data
+        setUser(response.data.user); // Update user state
         setIsLoggedIn(true);
-        console.log('User logged in successfully');
         navigate('/');
       }
 
@@ -60,14 +51,12 @@ export default function UserProvider({ children }) {
   };
 
   const logout = () => {
-    // Clear token from localStorage and set isLoggedIn to false
     localStorage.removeItem('jwt_token');
+    localStorage.removeItem('user'); // Remove user data from localStorage
     setIsLoggedIn(false);
-    console.log('User logged out'); 
+    setUser({ email: "", _id: "" }); // Clear user state
     navigate('/');
   };
-
-  console.log('IsLoggedIn:', isLoggedIn);
 
   return (
     <UserContext.Provider value={{ user, setUser, login, logout, isLoggedIn }}>

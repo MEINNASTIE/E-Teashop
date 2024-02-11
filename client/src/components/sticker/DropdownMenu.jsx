@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { UserContext } from '../../context/userProvider';
 
 export default function DropdownMenu({ logout }) {
   const [isOpen, setIsOpen] = useState(false);
+  const {user} = useContext(UserContext);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -12,7 +15,7 @@ export default function DropdownMenu({ logout }) {
     <div className="relative inline-block text-left">
       <div>
         <button type="button" onClick={toggleDropdown} className="text-white focus:outline-none">
-          User
+        {user.email}
         </button>
       </div>
       {isOpen && (

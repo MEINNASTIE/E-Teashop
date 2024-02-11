@@ -29,7 +29,7 @@ export const handleLogin = async (req, res) => {
     console.log("Login:", req.body);
 
     const user = await User.findOne({
-      username: req.body.username,
+      email: req.body.email,
     });
     console.log("user:", user);
 
@@ -39,12 +39,12 @@ export const handleLogin = async (req, res) => {
     if (!user || !isMatch)
       return res.send({
         success: false,
-        error: "Username or password not correct",
+        error: "Email or password not correct",
       });
 
     // jwt.sign(payload, secretOrPrivateKey, [options, callback])
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "10d",
+      expiresIn: "20d",
     });
     console.log("token:", token);
 

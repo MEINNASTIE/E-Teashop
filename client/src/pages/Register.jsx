@@ -46,7 +46,7 @@ export default function Register() {
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <input
-                  id="email-address"
+                  id="email"
                   name="email"
                   type="email"
                   autoComplete="email"

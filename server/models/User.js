@@ -6,8 +6,6 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: true,
-      unique: true,
     },
     email: {
       required: true,
@@ -16,6 +14,7 @@ const userSchema = new Schema(
     },
     password: {
       required: true,
+      unique: true,
       type: String,
     },
     profilePicture: {
@@ -26,6 +25,10 @@ const userSchema = new Schema(
       enum: ["admin", "customer"],
       default: "customer",
     },
+    cart: [{
+      product: { type: Schema.Types.ObjectId, ref: "Product" },
+      quantity: { type: Number, default: 1 }
+    }],
   },
   {
     timestamps: true,

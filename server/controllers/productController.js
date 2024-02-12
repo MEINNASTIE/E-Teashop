@@ -21,6 +21,7 @@ export async function createProduct(req, res) {
     description: req.body.description,
     price: req.body.price,
     category: req.body.category,
+    quantity: req.body.quantity,
     imageUrl: req.file ? req.file.path : null
   });
 
@@ -72,6 +73,20 @@ export async function getProductCategories(req, res) {
     const products = await Product.find();
     const categories = [...new Set(products.map(product => product.category))];
     res.json({ success: true, categories });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
+// GET A SINGLE PRODUCT
+export async function getProductById(req, res) {
+  try {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    res.json(product);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

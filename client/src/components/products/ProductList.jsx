@@ -36,7 +36,7 @@ export default function ProductList({ selectedCategories }) {
                             <Product
                                 key={product._id}
                                 product={product}
-                                addToCart={addToCart}
+                                addToCart={addToCart}  
                             />
                         ))}
                     </div>

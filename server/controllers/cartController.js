@@ -4,7 +4,7 @@ import Product from '../models/Product.js';
 // ADD AN ITEM TO USER CART
 export async function addToCart(req, res) {
   try {
-    const { productId } = req.body;
+    const { productId, quantity } = req.body;
     const userId = req.user;
 
     const user = await User.findById(userId);
@@ -17,16 +17,26 @@ export async function addToCart(req, res) {
       return res.status(400).json({ success: false, message: 'Product not available' });
     }
 
-    // Check if user has a cart
-    if (!user.cart) {
-      user.cart = []; // If user doesn't have a cart, initialize an empty cart array
+    let cartItem = user.cart.find(item => item.product.toString() === productId);
+    if (cartItem) {
+      // If the product already exists in the cart, update the quantity
+      const newQuantity = cartItem.quantity + quantity;
+      if (newQuantity > product.quantity) {
+        return res.status(400).json({ success: false, message: 'Insufficient quantity of product' });
+      }
+      cartItem.quantity = newQuantity;
+    } else {
+      // If the product doesn't exist in the cart, add it
+      if (quantity > product.quantity) {
+        return res.status(400).json({ success: false, message: 'Insufficient quantity of product' });
+      }
+      cartItem = { product: productId, quantity };
+      user.cart.push(cartItem);
     }
 
-    product.quantity -= 1;
-    await product.save();
-
-    user.cart.push({ product: productId, quantity: 1 }); // Push object with productId and quantity
-    await user.save(); // Await user save operation
+    // Update product quantity
+    product.quantity -= quantity;
+    await Promise.all([product.save(), user.save()]);
 
     res.status(200).json({ success: true, message: 'Item added to cart' });
   } catch (error) {
@@ -80,7 +90,8 @@ export async function removeFromCart(req, res) {
 // UPDATE CART ITEM
 export async function updateCartItem(req, res) {
   try {
-    const { productId, quantity } = req.body;
+    const { productId } = req.params;
+    const { quantity } = req.body;
     const userId = req.user;
 
     const user = await User.findById(userId);
@@ -107,6 +118,7 @@ export async function updateCartItem(req, res) {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 }
+
 
 
 // NOTICE CODE: Work on additional settings

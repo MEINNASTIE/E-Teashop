@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../context/userProvider';
 import DropdownMenu from './DropdownMenu';
+import SearchQuery from './SearchQuery';
 
 export default function Navbar() {
   const { isLoggedIn, logout } = useContext(UserContext);
@@ -20,13 +21,7 @@ export default function Navbar() {
         </Link>
         
         {/* Search Bar */}
-        <div className="flex-grow mx-4">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full py-2 px-4 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+        <SearchQuery />
         
         {/* User Login/Logout Button */}
         {isLoggedIn ? (

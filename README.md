@@ -28,3 +28,6 @@ E-Teashop (MERN) + Vercel
 
 .env for URL of the server in the client / npm i dotenv
 optional: incorporate email verification, validations
+
+
+NOTE: There is way too much code going on here // try to find a way to reduce spaghetti

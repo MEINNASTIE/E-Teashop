@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllProducts, createProduct, updateProduct, deleteProduct, getProductCategories } from '../controllers/productController.js';
+import { getAllProducts, createProduct, updateProduct, deleteProduct, getProductCategories, getProductById } from '../controllers/productController.js';
 import { addToCart, getCartItems, removeFromCart, updateCartItem } from '../controllers/cartController.js';
 
 import uploadCloud from "../middlewares/multerCloudinary.js";
@@ -10,6 +10,7 @@ const router = Router();
 
 router.get('/products', getAllProducts);
 router.get('/products/categories', getProductCategories);
+router.get('/products/:id', getProductById);
 router.post('/products', uploadCloud.single("image"), createProduct);
 router.patch('/products/:id', updateProduct);
 router.delete('/products/:id', deleteProduct);

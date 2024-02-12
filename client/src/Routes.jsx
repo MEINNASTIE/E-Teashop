@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Admin from "./pages/Admin";
 import PageNotFound from "./pages/PageNotFound";
 import CartPage from "./components/cart/CartMain";
+import ProductDisplay from "./pages/ProductDisplay";
 
 export default function App() {
 
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="/product/:productId" element={<ProductDisplay />} />
 
       {/* 404 */}
       <Route path="*" element={<PageNotFound />} />

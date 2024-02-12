@@ -8,7 +8,7 @@ export default function auth(req, res, next) {
     }
     const token = authHeader.replace('Bearer ', '');
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("🚀 ~ decoded:", decoded);
+    // console.log("🚀 ~ decoded:", decoded);
     req.user = decoded.id;
     next();
   } catch (error) {

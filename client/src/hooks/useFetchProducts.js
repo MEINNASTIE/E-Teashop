@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetchProducts = () => {
+export default function useFetchProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -21,6 +21,4 @@ const useFetchProducts = () => {
   }, []);
 
   return products;
-};
-
-export default useFetchProducts;
+}

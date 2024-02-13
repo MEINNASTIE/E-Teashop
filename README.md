@@ -25,12 +25,11 @@ E-Teashop (MERN) + Vercel
 
 #### 12.02.2024.
 - implement search query
-
+- make a user dashboard that shows a items ordered (leads to checkout and payment system too)
+- 
 **Tasks to be done:**
 
-### 12.02.2024.
-
-- make a user dashboard that shows a items ordered (leads to checkout and payment system too)
+### 13.02.2024.
 - create a User profile page for them to add payment methods (changing password and email(?))
 - add more options and features in the Product model for filtering
 

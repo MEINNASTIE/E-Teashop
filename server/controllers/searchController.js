@@ -4,11 +4,11 @@ export async function searchProducts(query) {
   try {
     const products = await Product.find({
       $or: [
-        { name: { $regex: query, $options: 'i' } }, // Case-insensitive search for name
-        { description: { $regex: query, $options: 'i' } }, // Case-insensitive search for description
-        { category: { $regex: query, $options: 'i' } } // Case-insensitive search for category
+        { name: { $regex: query, $options: 'i' } }, 
+        { description: { $regex: query, $options: 'i' } },
+        { category: { $regex: query, $options: 'i' } } 
       ]
-    }).populate('author'); // Populate the author field if needed
+    }).populate('author');
     return products;
   } catch (error) {
     throw new Error('Error searching products');

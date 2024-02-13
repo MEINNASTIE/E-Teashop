@@ -35,7 +35,8 @@ export default function SearchQuery() {
   }, []);
 
   return (
-    <div ref={searchRef} className="h-8 flex gap-2 ml-4 mt-4">
+    <div ref={searchRef} className="h-8  ml-4 mt-4">
+      <div className="flex gap-2">
       <input
         type="text"
         placeholder="Search for products"
@@ -44,14 +45,13 @@ export default function SearchQuery() {
         className="border p-2"
       />
       <button onClick={handleSearch}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-
-      <div>
+     </div>
+      <div className="bg-white">
         {results.map((product) => (
           <div key={product._id}>
             <h3>{product.name}</h3>
-            <p>{product.description}</p>
+           
             <p>Price: {product.price}</p>
-            {/* Display other product information as needed */}
           </div>
         ))}
       </div>

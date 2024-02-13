@@ -54,7 +54,7 @@ export default function Navbar() {
           <div>
             <Link to="/cart" className="text-white focus:outline-none">
               <FontAwesomeIcon icon={faShoppingCart} className="text-[26px]" />
-              {cartItemCount > 0 && <span className="absolute top-2 right-[9.3%] bg-[#E56E3C] rounded-full text-[9px] pl-2 pr-2 pt-1 pb-1">{cartItemCount}</span>}
+              {cartItemCount > 0 && <span className="absolute top-2 right-[9.3%] bg-[#E56E3C] rounded-full text-[9px] pl-2 pr-2 pt-1 pb-1 font-bold">{cartItemCount}</span>}
             </Link>
           </div>
 

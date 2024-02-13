@@ -28,7 +28,7 @@ export default function ProductList({ selectedCategories }) {
 
     return (
         <div className="container mx-auto min-h-screen">
-            <p className="text-[20px] text-gray-700 my-8 ml-10 mr-10">Offering the world's most compact selection of Chinese tea, Teapunktur bridges linguistic & cultural barriers that separate Chinese tea farmers and tea enthusiasts worldwide.</p>
+            <p className="text-[20px] text-gray-700 font-bold my-8 ml-10 mr-10">Offering the world's most compact selection of Chinese tea, Teapunktur bridges linguistic & cultural barriers that separate Chinese tea farmers and tea enthusiasts worldwide.</p>
             
             <h2 className="text-[36px] ml-10">Featured</h2>
             <div className="m-10">

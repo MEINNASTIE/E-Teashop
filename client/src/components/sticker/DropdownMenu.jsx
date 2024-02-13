@@ -19,12 +19,12 @@ export default function DropdownMenu({ logout }) {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+        <div className="origin-top-right absolute right-0 mt-2 w-48 shadow-s bg-white focus:outline-none">
+          <div className="py-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
           {user.role === 'admin' && ( 
               <>
-                <Link to="/admin">Profile</Link> 
-                <hr></hr>
+                <Link to="/admin" className="ml-4">Profile</Link> 
+                <hr className="mt-2"></hr>
               </>
             )}
             <button

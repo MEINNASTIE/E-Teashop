@@ -27,11 +27,13 @@ export default function ProductList({ selectedCategories }) {
     };
 
     return (
-        <div className="container mx-auto">
-            <h2 className="text-3xl font-bold my-8">All Products</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
+        <div className="container mx-auto min-h-screen">
+            <p className="text-[20px] text-gray-700 my-8 ml-10 mr-10">Offering the world's most compact selection of Chinese tea, Teapunktur bridges linguistic & cultural barriers that separate Chinese tea farmers and tea enthusiasts worldwide.</p>
+            
+            <h2 className="text-[36px] ml-10">Featured</h2>
+            <div className="m-10">
                 {productChunks.map((chunk, index) => (
-                    <div key={index} className="grid grid-cols-1 gap-6">
+                    <div key={index} className="grid grid-cols-4 gap-6">
                         {chunk.map(product => (
                             <Product
                                 key={product._id}

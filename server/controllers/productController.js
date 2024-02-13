@@ -44,7 +44,7 @@ export async function updateProduct(req, res) {
     }
 
     // Update product properties if they are provided in the request body
-    ['name', 'description', 'price', 'imageUrl'].forEach((key) => {
+    ['name', 'description', 'price', 'imageUrl', 'quantity'].forEach((key) => {
       if (req.body[key] !== undefined) {
         product[key] = req.body[key];
       }

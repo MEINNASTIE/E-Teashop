@@ -7,6 +7,8 @@ export default function ProductList({ selectedCategories }) {
     const products = useFetchProducts();
     const [cartItems, setCartItems] = useState([]);
 
+    const [total, setTotal] = useState(0);
+
     // this function was HELL to think of, create and connect haha 
     const filteredProducts = products.filter(product => {
         if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
@@ -35,6 +37,19 @@ export default function ProductList({ selectedCategories }) {
         localStorage.setItem('cartItems', JSON.stringify(updatedCart));
     };
 
+    const handleLoadMore = async () => {
+        const response = await axios.get(
+          import.meta.env.VITE_BASE_URL +
+            `/auth/get/all?&skip=${products.length}`
+        );
+        console.log("🚀 ~ response:", response);
+    
+        if (response.data.success) {
+        //   setUsers((prev) => [...prev, ...response.data.users]);
+          setTotal(response.data.total);
+        }
+      };
+
     return (
         <div className="container mx-auto min-h-screen"> 
             <p className="text-[20px] text-gray-700 font-bold my-8 ml-12 mr-10">Offering the world's most compact selection of Chinese tea, Teapunktur bridges linguistic & cultural barriers that separate Chinese tea farmers and tea enthusiasts worldwide.</p>
@@ -60,6 +75,9 @@ export default function ProductList({ selectedCategories }) {
                     </div>
                 ))}
             </div>
+            {products.length < total && (
+             <button onClick={handleLoadMore}>Load more</button>
+            )}
         </div>
     );
 }

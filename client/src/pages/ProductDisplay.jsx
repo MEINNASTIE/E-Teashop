@@ -111,6 +111,11 @@ export default function ProductDisplay() {
               <input type="number" min="1" value={quantity} onChange={handleQuantityChange} className="block w-1/6 mt-1 p-2 border focus:outline-none " />
             </div>
 
+            <div className="mt-5">
+              <span className="text-[#782F10] font-bold mr-8">Left in stock:</span>
+              <span className="text-gray-600">{product.quantity}</span>
+            </div>
+
             <div className="mt-20">
               <h2 className="text-[20px] mb-10 text-[#782F10]">Payment & Security</h2>
               <div className="flex gap-4 items-center w-10">

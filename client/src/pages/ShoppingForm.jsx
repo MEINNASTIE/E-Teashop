@@ -66,7 +66,7 @@ export default function ShippingForm() {
   };
 
   return (
-    <div className="container mx-auto py-5">
+    <div className="container mx-auto py-5 mb-10">
       <div className="flex justify-center">
         <div className="mb-4 mr-10">
         <div className="mb-8 text-gray-500">

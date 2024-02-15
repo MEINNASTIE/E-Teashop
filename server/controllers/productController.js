@@ -4,7 +4,13 @@ import Product from '../models/Product.js';
 // GET ALL PRODUCTS
 export async function getAllProducts(req, res) {
   try {
-    const products = await Product.find();
+    
+    let filter = {};
+
+    const products = await Product.find(); 
+
+    const total = await Product.countDocuments(filter);
+    console.log("🚀 ~ total:", total);
     // res.json(products);
     res.send({ success: true, products });
   } catch (err) {

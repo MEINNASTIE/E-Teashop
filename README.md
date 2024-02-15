@@ -26,16 +26,19 @@ E-Teashop (MERN) + Vercel
 #### 12.02.2024.
 - implement search query
 - make a user dashboard that shows a items ordered (leads to checkout and payment system too)
-- 
-**Tasks to be done:**
 
 ### 13.02.2024.
 - create a User profile page for them to add payment methods (changing password and email(?))
-- add more options and features in the Product model for filtering
+- verification email done
+- wishlist added to Profile
 
+**Tasks to be done:**
+
+- add Profile page update for shipping methods
+- more filtering options
+- reviews and rating system
   
-.env for URL of the server in the client / npm i dotenv
-optional: incorporate email verification, validations
+.env for URL of the server in the client
 
 
-NOTE: There is way too much code going on here // try to find a way to reduce spaghetti
+NOTE: More upgrades to come 

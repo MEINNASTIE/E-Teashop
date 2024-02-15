@@ -85,21 +85,33 @@ export default function ProductList() {
                   {product.imageUrl && 
                   <img src={product.imageUrl} alt={product.name} className="w-40 h-13" />}
                 </td>
-                <td className="px-4 py-2">{editProduct === product ? <input type="text" name="name" value={updatedData.name} onChange={handleInputChange} className="border border-gray-300 px-2 py-1 rounded" /> : product.name}</td>
-                <td className="px-4 py-2">{editProduct === product ? <input type="text" name="description" value={updatedData.description} onChange={handleInputChange} className="border border-gray-300 px-2 py-1 rounded" /> : product.description}</td>
-                <td className="px-4 py-2">{editProduct === product ? <input type="text" name="price" value={updatedData.price} onChange={handleInputChange} className="border border-gray-300 px-2 py-1 rounded" /> : product.price}</td>
-                <td className="px-4 py-2">{editProduct === product ? <input type="text" name="category" value={updatedData.category} onChange={handleInputChange} className="border border-gray-300 px-2 py-1 rounded" /> : product.category}</td>
-                <td className="px-4 py-2">{editProduct === product ? <input type="number" name="quantity" value={updatedData.quantity} onChange={handleInputChange} min="1" step="1" className="border border-gray-300 px-2 py-1 rounded" /> : product.quantity}</td>
+                <td className="px-4 py-2">{editProduct === product ? <input type="text" name="name" value={updatedData.name} onChange={handleInputChange} className="border border-gray-300 px-2 py-1" /> : product.name}</td>
+                <td className="px-4 py-2">
+                  {editProduct === product ? (
+                    <input
+                      type="text"
+                      name="description"
+                      value={updatedData.description}
+                      onChange={handleInputChange}
+                      className="border border-gray-300 px-2 py-1 w-full truncate"
+                    />
+                  ) : (
+                    <div className="w-60 truncate">{product.description}</div>
+                  )}
+                </td>
+                <td className="px-4 py-2">{editProduct === product ? <input type="text" name="price" value={updatedData.price} onChange={handleInputChange} className="border border-gray-300 px-2 py-1 w-20" /> : product.price}</td>
+                <td className="px-4 py-2">{editProduct === product ? <input type="text" name="category" value={updatedData.category} onChange={handleInputChange} className="border border-gray-300 px-2 py-1" /> : product.category}</td>
+                <td className="px-4 py-2">{editProduct === product ? <input type="number" name="quantity" value={updatedData.quantity} onChange={handleInputChange} min="1" step="1" className="border border-gray-300 px-2 py-1 w-20" /> : product.quantity}</td>
                 <td className="px-8 py-2">
                   {editProduct === product ? (
                     <>
-                      <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded mr-2" onClick={handleUpdate}>Update</button>
-                      <button className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded" onClick={() => setEditProduct(null)}>Cancel</button>
+                      <button className="bg-white hover:bg-[#BCC490] px-2 py-1 mr-2 mb-4" onClick={handleUpdate}>Update</button>
+                      <button className="bg-white hover:bg-[#BCC490] px-2 py-1 mb-4" onClick={() => setEditProduct(null)}>Cancel</button>
                     </>
                   ) : (
-                    <button className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded mr-2" onClick={() => handleEdit(product)}>Edit</button>
+                    <button className="bg-white hover:bg-[#BCC490] px-2 py-1 mr-2 mb-4" onClick={() => handleEdit(product)}>Edit</button>
                   )}
-                  <button className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded" onClick={() => handleDelete(product._id)}>Delete</button>
+                  <button className="bg-white hover:bg-[#BCC490] px-2 py-1 " onClick={() => handleDelete(product._id)}>Delete</button>
                 </td>
               </tr>
             ))}

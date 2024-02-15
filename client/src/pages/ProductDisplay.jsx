@@ -16,7 +16,6 @@ export default function ProductDisplay() {
   
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
-    // Do something with the selected size, like updating state or performing an action
   };
 
   useEffect(() => {
@@ -129,7 +128,7 @@ export default function ProductDisplay() {
             <button onClick={addToCart} className="border-[#782F10] border text-[#782F10] hover:bg-[#782F10] hover:text-white font-semibold py-2 px-4 mt-[50px] hover:transform hover:-translate-y-1 transition duration-200">
             Add to Cart
             </button>
-            {addToCartError && <p className="text-red-500 mt-2">{addToCartError}</p>}
+            {addToCartError && <p className="text-red-500 mt-2 absolute">{addToCartError}</p>}
             </div>
           </div>
         </div>

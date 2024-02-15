@@ -41,7 +41,7 @@ export default function Navbar() {
        
         <Link to="/" className="flex items-center">
           <img className="h-8" src="/assets/tea.png" alt="Logo" />
-          <span className="text-white text-xl font-semibold ml-2">Teapunktur</span>
+          <span className="text-white text-xl font-semibold ml-2">TEAPUNKTUR</span>
         </Link>
         
         <div className="flex gap-4 items-center">

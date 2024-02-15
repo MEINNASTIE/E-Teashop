@@ -7,6 +7,7 @@ export default function Register() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [message, setMessage] = useState(""); 
 
     const navigate = useNavigate();
 
@@ -22,28 +23,40 @@ export default function Register() {
         password,
       };
   
-      const response = await axios.post(
-        "http://localhost:5000/auth/register",
-        body
-      );
-      console.log("🚀 ~ response:", response.data);
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/auth/register",
+          body
+        );
+        console.log("🚀 ~ response:", response.data);
   
-      if (response.data.success) navigate("/login");
+        if (response.data.success) {
+          setMessage("A verification email has been sent to your email address. Please check your inbox and click on the verification link.");
+          navigate("/login");
+        }
+      } catch (error) {
+        setError("Registration failed. Please try again.");
+      }
     };
+  
 
     const handleTogglePassword = () => {
       setShowPassword(!showPassword);
     };
 
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8" style={{
+            backgroundImage: `url('/assets/tealogin.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+      }}>
+        <div className="max-w-md w-full space-y-8 bg-white p-6 shadow-md border-[#BCC490] border-4">
           <div>
             <h2 className="text-center text-3xl font-extrabold text-gray-900">Register</h2>
           </div>
           <form className="mt-8 space-y-6" method="POST" onSubmit={handleSubmit} >
             <input type="hidden" name="remember" defaultValue="true" />
-            <div className="rounded-md shadow-sm -space-y-px">
+            <div>
               <div>
                 <input
                   id="email"
@@ -53,7 +66,7 @@ export default function Register() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-[#782F10] focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
               </div>
@@ -66,20 +79,21 @@ export default function Register() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-[#782F10] focus:z-10 sm:text-sm mt-10"
                   placeholder="Password"
                 />
                  <div
-                    className="absolute top-9 right-3 cursor-pointer text-blue-500"
+                    className="absolute top-[50%] right-[40.3%] cursor-pointer"
                     onClick={handleTogglePassword}
                   >{showPassword ? 'Hide' : 'Show'}</div>
               </div>
             </div>
+            {message && <p className="text-green-500">{message}</p>}
             <p className="text-red-500 h-[2rem]">{error}</p>
             <div>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="border-[#782F10] border text-[#782F10] hover:bg-[#782F10] hover:text-white font-semibold py-2 px-4 hover:transform hover:-translate-y-1 transition duration-200 w-full"
               >
                 Sign in
               </button>

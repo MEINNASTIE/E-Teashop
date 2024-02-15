@@ -49,7 +49,7 @@ export default function AddProduct() {
             value={name} 
             onChange={(e) => setName(e.target.value)} 
             required 
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border border-gray-300  focus:outline-none focus:border-[#BCC490]"
           />
         </div>
   
@@ -59,7 +59,7 @@ export default function AddProduct() {
             value={description} 
             onChange={(e) => setDescription(e.target.value)} 
             required 
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border border-gray-300  focus:outline-none focus:border-[#BCC490]"
           />
         </div>
   
@@ -70,7 +70,7 @@ export default function AddProduct() {
             value={price} 
             onChange={(e) => setPrice(e.target.value)} 
             required 
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-[#BCC490]"
           />
         </div>
   
@@ -81,7 +81,7 @@ export default function AddProduct() {
             value={category} 
             onChange={(e) => setCategory(e.target.value)} 
             required 
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-[#BCC490]"
           />
         </div>
   
@@ -92,7 +92,7 @@ export default function AddProduct() {
             value={quantity} 
             onChange={(e) => setQuantity(e.target.value)} 
             required 
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border border-gray-300  focus:outline-none focus:border-[#BCC490]"
           />
         </div>
   
@@ -102,11 +102,14 @@ export default function AddProduct() {
             accept="image/png, image/jpeg" 
             onChange={handleImageSelect} 
             required 
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="absolute opacity-0 cursor-pointer"
           />
+           <span className="px-4 py-2 border-[#BCC490] border hover:bg-[#BCC490] text-[#BCC490] px-4 py-2 hover:text-white focus:outline-none focus:border-[#BCC490]">
+               Browse
+           </span>
         </div>
   
-        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md focus:outline-none">Add Product</button>
+        <button type="submit" className="border-[#BCC490] border hover:bg-[#BCC490] text-[#BCC490] px-4 py-2 hover:text-white focus:outline-none transition duration-300">Add Product</button>
       </form>
     </div>
   );

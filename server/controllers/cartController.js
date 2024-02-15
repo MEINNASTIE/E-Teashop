@@ -19,14 +19,13 @@ export async function addToCart(req, res) {
 
     let cartItem = user.cart.find(item => item.product.toString() === productId);
     if (cartItem) {
-      // If the product already exists in the cart, update the quantity
+     
       const newQuantity = cartItem.quantity + quantity;
       if (newQuantity > product.quantity) {
         return res.status(400).json({ success: false, message: 'Insufficient quantity of product' });
       }
       cartItem.quantity = newQuantity;
     } else {
-      // If the product doesn't exist in the cart, add it
       if (quantity > product.quantity) {
         return res.status(400).json({ success: false, message: 'Insufficient quantity of product' });
       }
@@ -34,7 +33,6 @@ export async function addToCart(req, res) {
       user.cart.push(cartItem);
     }
 
-    // Update product quantity
     product.quantity -= quantity;
     await Promise.all([product.save(), user.save()]);
 
@@ -51,7 +49,7 @@ export async function getCartItems(req, res) {
   try {
     const userId = req.user;
 
-    const user = await User.findById(userId).populate('cart.product'); // Populate the 'product' field in the 'cart' array with actual product details
+    const user = await User.findById(userId).populate('cart.product'); 
 
     if (!user) {
       return res.status(400).json({ success: false, message: 'User not found' });
@@ -119,6 +117,23 @@ export async function updateCartItem(req, res) {
   }
 }
 
+// DELETE ALL ITEMS FROM CART
+export async function clearCart(req, res) {
+  try {
+    const userId = req.user;
 
+    const user = await User.findById(userId);
+    if (!user) return res.status(400).json({ success: false, message: 'User not found' });
+
+    // Reset the user's cart array
+    user.cart = [];
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Cart cleared successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+}
 
 // NOTICE CODE: Work on additional settings

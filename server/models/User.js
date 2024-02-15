@@ -29,6 +29,16 @@ const userSchema = new Schema(
       product: { type: Schema.Types.ObjectId, ref: "Product" },
       quantity: { type: Number, default: 1 }
     }],
+    wishlist: [{
+      product: { type: Schema.Types.ObjectId, ref: "Product" },
+    }],
+    verificationToken: {
+      type: String,
+    },
+    verified: {
+      type: Boolean,
+      default: false,
+    }
   },
   {
     timestamps: true,
